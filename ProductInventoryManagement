@@ -1,0 +1,181 @@
+/*
+This is the ProductDriver.java class. It contains the main file.
+*/
+
+package productPack;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class ProductDriver {
+
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+		int productId=0;
+		String filePath="abc.txt";
+		Product p = new Product();
+		Product pa = new Product();
+		Inventory i = new Inventory();
+		Scanner s = new Scanner(System.in);
+		System.out.println("****Welcome to Product Inventory****\n");
+		System.out.println("1.Add Product");
+		System.out.println("2.Delete Product");
+		System.out.println("3.Edit Stock");
+		System.out.println("4.View Inventory");
+		System.out.println("5.Exit");
+		System.out.println("Enter a choice");
+		int userChoice = s.nextInt();
+		
+		switch(userChoice)
+		{
+		case 1: 
+			
+			System.out.println("Enter a product name: ");
+			p.setName(s.next());
+			System.out.println("Enter the product qty: ");
+			p.setQuantity(s.nextInt());
+			System.out.println("Enter the price: ");
+			p.setPrice(s.nextDouble());
+			p.setId(++productId);
+			System.out.println(p.toString());
+			pa.addProduct(p);
+			main(args);
+			break;
+		case 2:
+			System.out.println("Inside 2");
+			break;
+		case 3:
+			System.out.println("Inside 3");
+			break;
+		case 4:
+			System.out.println("Inside 4");
+			
+			pa.toString();
+			
+			
+			break;
+		case 5:
+			System.out.println("Thank you");
+			System.exit(0);
+		default:
+			System.out.println("Enter a valid choice, redirecting to main menu");
+			main(args);
+			
+		}
+
+	}
+
+}
+
+
+/*
+This is the inventory.java class and is used to display the contents of the inventory
+*/
+package productPack;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class Inventory{
+
+	String filePath = "abc.txt";
+	FileInputStream fin = null;
+	
+	
+	public Object viewInventory(String filePath) throws IOException, ClassNotFoundException
+	{
+		fin = new FileInputStream(filePath);
+		ObjectInputStream ois = new ObjectInputStream(fin);
+		Object obj = ois.readObject();
+		ois.close();
+		return obj;
+		
+	}
+}
+
+/*
+This is the product.java class which is contains the variable declarations and add product method
+*/
+
+package productPack;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.logging.FileHandler;
+
+
+
+public class Product implements Serializable{
+
+	private double price;
+	private int id;
+	private int quantity;
+	private String name;
+	FileInputStream fin= null; 
+	FileOutputStream fout= null;
+
+	
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int addProduct(Product p) throws IOException
+	{
+		
+		 //fin =  new FileInputStream("abc.txt");
+		try
+		{
+		 fout = new FileOutputStream("abc.txt",true);
+		 ObjectOutputStream oos = new ObjectOutputStream(fout);
+		 //oos.writeObject(obj);
+		 oos.writeObject(p);
+		 return 0;
+		}
+		catch (IOException e)
+		{
+			System.out.println(e.getMessage());
+			return -1;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [price=" + price + ", id=" + id + ", quantity="
+				+ quantity + ", name=" + name +" ] ";
+	}
+	
+	
+	
+	
+}
