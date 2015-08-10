@@ -1,0 +1,20 @@
+package quizPack;
+
+public class HistoricalData {
+		private int quizAttempt;
+		private int quizMarks;
+		
+		public int getQuizAttempt() {
+			return quizAttempt;
+		}
+		public void setQuizAttempt(int quizAttempt) {
+			this.quizAttempt = quizAttempt;
+		}
+		public int getQuizMarks() {
+			return quizMarks;
+		}
+		public void setQuizMarks(int quizMarks) {
+			this.quizMarks = quizMarks;
+		}
+		
+}
