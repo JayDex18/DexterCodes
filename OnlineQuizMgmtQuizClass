@@ -1,0 +1,43 @@
+package quizPack;
+
+public class Quiz {
+	
+	private String quizId;
+	private String quizName;
+	private String quizSubject;
+	private String quizQuestion;
+	private String quizAnswer;
+	
+	public String getQuizId() {
+		return quizId;
+	}
+	public void setQuizId(String quizId) {
+		this.quizId = quizId;
+	}
+	public String getQuizName() {
+		return quizName;
+	}
+	public void setQuizName(String quizName) {
+		this.quizName = quizName;
+	}
+	public String getQuizSubject() {
+		return quizSubject;
+	}
+	public void setQuizSubject(String quizSubject) {
+		this.quizSubject = quizSubject;
+	}
+	public String getQuizQuestion() {
+		return quizQuestion;
+	}
+	public void setQuizQuestion(String quizQuestion) {
+		this.quizQuestion = quizQuestion;
+	}
+	public String getQuizAnswer() {
+		return quizAnswer;
+	}
+	public void setQuizAnswer(String quizAnswer) {
+		this.quizAnswer = quizAnswer;
+	}
+	
+
+}
