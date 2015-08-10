@@ -1,0 +1,81 @@
+package quizPack;
+
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class UserClass {
+	private String userId;
+	private String userName;
+	private String userEmail;
+	private int userContact;
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public int getUserContact() {
+		return userContact;
+	}
+	public void setUserContact(int userContact) {
+		this.userContact = userContact;
+	}
+	
+	public Connection getSQLConnection() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@lshpedev.fm.group:1527:shpd9pr2","loki_picc", "bagpu55");
+		return conn;
+	}
+	
+	
+	public int TeacherReg(String userName,String email, String contact) throws ClassNotFoundException, SQLException
+	{
+		String seq=null;
+		String teacherIdConstant = "T";
+		Connection con = getSQLConnection();
+		java.sql.Statement stmt=null;
+		stmt=con.createStatement();
+		String sql = "select teacher_id.nextval from dual";
+		ResultSet rs = stmt.executeQuery(sql);
+		while(rs.next())
+		{
+		 seq = rs.getString(1);
+
+		}
+		String nextTeacherId = teacherIdConstant.concat("_"+seq);
+
+		PreparedStatement pstmt = con.prepareStatement("insert into teachers values(?,?,?,?)");
+		pstmt.setString(1,nextTeacherId);
+		pstmt.setString(2,userName);
+		pstmt.setString(3,email);
+		pstmt.setString(4,contact);
+		pstmt.executeUpdate();
+		
+		
+		System.out.println(nextTeacherId);
+		
+		return -1;
+	}
+	
+	
+
+}
