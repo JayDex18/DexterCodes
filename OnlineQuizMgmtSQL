@@ -1,0 +1,124 @@
+/****Teachers Table****/
+
+Create table teachers
+(
+T_ID varchar2(7) NOT NULL,
+T_Name varchar2(50) NOT NULL,
+T_MAILID varchar2(50) ,
+T_phone number,
+constraint teachers_pk PRIMARY KEY(T_ID)
+);
+
+drop table teachers;
+
+
+/****Student Table****/
+
+Create table students
+(
+S_ID varchar2(7) NOT NULL,
+S_Name varchar2(50) NOT NULL,
+s_MAILID varchar2(50) ,
+s_phone number,
+constraint students_pk PRIMARY KEY(s_ID)
+);
+
+----drop table students;
+
+/****QUIZ TABLE****/
+
+create table quiz
+(
+Q_ID varchar2(7) not null,
+Q_NAME varchar2(50) not null,
+Q_SUBJECT VARCHAR2(50) not null,
+T_ID varchar2(7) not null,
+constraint quiz_pk PRIMARY KEY(q_id),
+constraint fk_teachers foreign key(t_id) references teachers(t_id)
+);
+
+
+--drop table quiz;
+
+/****QUIZ QUESTIONS****/
+create table quiz_questions
+(
+q_que_id number not null,
+q_id varchar2(7) not null,
+q_question varchar2(255),
+q_answer varchar2(255),
+constraint quiz_questions_pk PRIMARY KEY(q_que_id),
+constraint fk_quiz FOREIGN KEY(q_id) references quiz(q_id)
+
+);
+
+--drop table quiz_questions
+
+/****QUIZ HISTORY****/
+create table quiz_history
+(
+q_hist_id number not null,
+q_id varchar2(7),
+s_id varchar2(7),
+q_attempt_id number default '1',
+q_marks number default '0',
+constraint q_hist_id_pk PRIMARY KEY(q_hist_id),
+constraint fk_quiz_history foreign key(q_id) references quiz(q_id),
+constraint fk_student foreign key(s_id) references students(s_id)
+);
+
+--drop table quiz_history;
+
+
+/****TeacherID Sequence****/
+create sequence teacher_id
+start with 1
+maxvalue 9999
+increment by 1
+nocache
+nocycle;
+
+drop sequence teacher_id;
+
+/****StudentID sequence****/
+create sequence student_id
+start with 1
+maxvalue 9999
+increment by 1
+nocache
+nocycle;
+
+drop sequence student_id;
+
+/****QuizID sequence****/
+
+create sequence quiz_id
+start with 1
+maxvalue 9999
+increment by 1
+nocache
+nocycle;
+
+drop sequence quiz_id;
+
+/****QuizQue Sequence****/
+
+create sequence quiz_que_id
+start with 1
+maxvalue 9999
+increment by 1
+nocache
+nocycle;
+
+drop sequence quiz_que_id;
+
+/****Quiz History****/
+
+create sequence quiz_history_id
+start with 1
+maxvalue 9999
+increment by 1
+nocache
+nocycle;
+
+drop sequence quiz_history_id;
