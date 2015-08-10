@@ -1,0 +1,47 @@
+package quizPack;
+
+import java.sql.SQLException;
+import java.util.*;
+
+public class QuizDriver {
+
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		
+		Scanner s= new Scanner(System.in);
+		
+		System.out.println("/****Welcome to Online Quiz****/");
+		
+		System.out.println("1. Teacher Registration\n"+
+						   "2. Student Registration\n"+
+				           "3. Teacher Login\n"+
+						   "4. Student Login\n"+
+				           "5. Create Quiz\n"+
+						   "6. Take Quiz");
+		int choice = s.nextInt();
+		switch(choice)
+		{
+		case 1:
+			System.out.print("Enter Your Name: \n");
+			String tName = s.next();
+			System.out.print("Enter your email: \n");
+			String tEmail = s.next();
+			System.out.print("Enter your mobile number: \n");
+			String tMobile = s.next();
+			UserClass u = new UserClass();
+			//u.setUserName(tName);
+			//u.setUserEmail(tEmail);
+			//u.setUserContact(tMobile);
+			u.TeacherReg(tName,tEmail,tMobile);
+			break;
+		
+		
+		
+		}
+		
+		
+		
+
+	}
+
+}
